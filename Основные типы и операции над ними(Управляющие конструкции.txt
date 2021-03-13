@@ -1,0 +1,196 @@
+1.5 Basic types and supported operations
+
+//Целые типы данных
+short - usually 2 bytes
+int - usually 4 bytes, values from {-2**31; 2**31)
+long - usually 4 bytes
+long long - usually 8 bytes {-2**63; 2*63)
+
+char - в целом ведет себя как целое число, занимает 1 байт, разница в том, что можно хранить литералы 'a'
+если складывать char, то будет вести себя как int 'a' + 'b' = 195
+signed_char от -128 до 127
+
+//Широкоформатные символы использующиеся, к примеру, для хранения юникода
+wchar16_t 
+wchar32_t
+
+//Литеральные суффиксы
+3ll; - long long
+3ull; - unsigned long long
+3u; - unsigned int
+3f; - float
+3l; - long double
+
+int x= 012; // 0 перед значением означет, что это восмеричные литерал
+std::cout<<x;//10 потому что восьмиричная система счисления
+
+int x = 0xF // 0x перед значением означает, что это шестнадцатеричный литерал
+std::cout<<x;//15
+
+
+
+unsigned int [0; 2**32) (можно написать unsigned и будет подразумеваться unsigned int)
+
+Данные типы данных используются если мы хотим что-то объявить что не превосходит конкретный размер!
+int32_t
+int64_t
+int128_t
+uint32_t
+uint64_t
+using size_t = uint64_t
+//
+
+// Типы с плавующей точкой
+Если мы пишем число 0.0, то по стандарту считается что это тип double
+
+float - usually 4 bytes
+double - usually 8 bytes
+
+Чем больше число по модулю, тем меньше будет точность для double 
+https://en.wikipedia.org/wiki/Double-precision_floating-point_format
+long double - 16 bytes
+
+//Логические операторы
+занимает 1 байт, потому что адреса записываются в байтах и не могут быть записаны 1 битом!
+bool
+|| && != == !
+true 
+false
+
+//Неявное преобразование типов заключается в том, что типы более узкого формата автоматически преобразуются к более широкому
+Integer promotion
+
+Если у нас есть выражение в котором фигурирует int и unsigned int, то при произвидении действий над ними int будет преобразован в unsigned int
+int x = -1;
+unsigned y = 0;
+y-x;//выведется очень большое положительное число
+
+Floating point promotion
+float->double
+double->long double
+
+Bool promotion
+2+true// выведет 3, потому что при преобразовании bool к int, true превращается в 1
+2+false// выведет 2, потому что false превращается в 0
+
+//floating point to int
+Отбрасывается дробная часть
+int x = 1.5;
+std::cout<<x<<"\n";//1.5
+std::cout<<(double)x<<"\n";//1
+
+
+
+
+
+std::string s = "abcdefgh";
+s[1] = 'b';
+s.size(); s.length();
+s.substr(3,2);
+s + 'i';
+'e' + s;
+s + s;
+
+std::vector<int> v(10);
+v[5] = 3;
+v.resize(20);
+v.push_back(4);
+v.pop_back();
+v.front();
+v.back();
+
+std::stack<int> st;
+std::queue<int> q;
+
+st.push(0);
+st.pop();
+st.top();
+st.front();
+st.empty();
+
+std::set<int> set;
+std::unordered_set<int> uset;
+
+set.insert(4);
+set.erase(2);
+set.count(3);
+set.size();
+
+
+std::map<<std::string, int> m;
+std::unordered_map<std::string, int> um;
+
+m["aaaa"] = 8;
+m.size();
+std::cout<<m["aaaa"];
+m.count("aaaa");
+m.empty();
+
+1.7 Control statements
+
+if (condition) statement; // Если statemnt не bool, то он будет неявно скастовываться в bool
+
+switch (expression) {
+case 1:
+	statements...;
+	break;
+case 2:
+	statements...;
+	break;
+
+...
+
+case n:
+	statements...;
+	break;
+
+default:
+	statement;
+
+//Выполниться, если не прошел ни один из кейсов!
+
+//Обязательно писать break, иначе будут выполняться все остальные кейсы;
+
+
+for( (1)declaration of expression; bool-expression; (3) expression of the step){
+	statements;	
+}
+
+(1) - не обязательно должен быть инт мы можем итерироваться по любой структуре данных
+(2) - любое булевское выражение, если не булевское, то оно будет неявно приведено к нему
+(3) - абсолютное любое выражение, к примеру мы можем на каждом шаге вычислять функцию или делать любое другое действие
+если встречаем break, то сразу выходим из цикла
+если встречаем continue, то забиваем на все, что находится после этого слова и сразу переходим к новой итерации
+
+
+while (condition){
+
+}
+
+do {
+
+} while (condition);
+
+также есть goto, но данная конструкция чаще всего используется в C и в ней нет большой необходимотси в C++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
